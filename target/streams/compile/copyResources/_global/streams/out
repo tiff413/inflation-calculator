@@ -1,0 +1,6 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/tiffany/Desktop/scala_learning/inflation-calculator/conf/application.conf,/home/tiffany/Desktop/scala_learning/inflation-calculator/target/scala-2.13/classes/application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/tiffany/Desktop/scala_learning/inflation-calculator/conf/logback.xml,/home/tiffany/Desktop/scala_learning/inflation-calculator/target/scala-2.13/classes/logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/tiffany/Desktop/scala_learning/inflation-calculator/conf/secure.conf,/home/tiffany/Desktop/scala_learning/inflation-calculator/target/scala-2.13/classes/secure.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/tiffany/Desktop/scala_learning/inflation-calculator/conf/routes,/home/tiffany/Desktop/scala_learning/inflation-calculator/target/scala-2.13/classes/routes)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/tiffany/Desktop/scala_learning/inflation-calculator/conf/generated.keystore,/home/tiffany/Desktop/scala_learning/inflation-calculator/target/scala-2.13/classes/generated.keystore)[0m
