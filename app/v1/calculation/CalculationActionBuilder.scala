@@ -1,4 +1,4 @@
-package v1.calculate
+package v1.calculation
 
 import javax.inject.Inject
 
@@ -10,17 +10,18 @@ import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-/** A wrapped request for calculate resources.
+/** A wrapped request for calculation resources.
   *
   * This is commonly used to hold request-specific information like
   * security credentials, and useful shortcut methods.
   */
-trait PostRequestHeader
+trait CalculationRequestHeader
     extends MessagesRequestHeader
     with PreferredMessagesProvider
-class PostRequest[A](request: Request[A], val messagesApi: MessagesApi)
+
+class CalculationRequest[A](request: Request[A], val messagesApi: MessagesApi)
     extends WrappedRequest(request)
-    with PostRequestHeader
+    with CalculationRequestHeader
 
 /** Provides an implicit marker that will show the request in all logger statements.
   */
@@ -45,29 +46,29 @@ trait RequestMarkerContext {
 
 }
 
-/** The action builder for the Calculate resource.
+/** The action builder for the Calculation resource.
   *
   * This is the place to put logging, metrics, to augment
   * the request with contextual data, and manipulate the
   * result.
   */
-class CalculateActionBuilder @Inject() (
+class CalculationActionBuilder @Inject() (
     messagesApi: MessagesApi,
     playBodyParsers: PlayBodyParsers
 )(implicit val executionContext: ExecutionContext)
-    extends ActionBuilder[PostRequest, AnyContent]
+    extends ActionBuilder[CalculationRequest, AnyContent]
     with RequestMarkerContext
     with HttpVerbs {
 
   override val parser: BodyParser[AnyContent] = playBodyParsers.anyContent
 
-  type CalculateRequestBlock[A] = PostRequest[A] => Future[Result]
+  type CalculationRequestBlock[A] = CalculationRequest[A] => Future[Result]
 
   private val logger = Logger(this.getClass)
 
   override def invokeBlock[A](
       request: Request[A],
-      block: CalculateRequestBlock[A]
+      block: CalculationRequestBlock[A]
   ): Future[Result] = {
     // Convert to marker context and use request in block
     implicit val markerContext: MarkerContext = requestHeaderToMarkerContext(
@@ -75,7 +76,7 @@ class CalculateActionBuilder @Inject() (
     )
     logger.trace(s"invokeBlock: ")
 
-    val future = block(new PostRequest(request, messagesApi))
+    val future = block(new CalculationRequest(request, messagesApi))
 
     future.map { result =>
       request.method match {
@@ -88,30 +89,28 @@ class CalculateActionBuilder @Inject() (
   }
 }
 
-/** Packages up the component dependencies for the calculate controller.
+/** Packages up the component dependencies for the calculation controller.
   *
   * This is a good way to minimize the surface area exposed to the controller, so the
   * controller only has to have one thing injected.
   */
-case class CalculateControllerComponents @Inject() (
-                                                     postActionBuilder: CalculateActionBuilder,
-                                                     postResourceHandler: CalculateResourceHandler,
-                                                     actionBuilder: DefaultActionBuilder,
-                                                     parsers: PlayBodyParsers,
-                                                     messagesApi: MessagesApi,
-                                                     langs: Langs,
-                                                     fileMimeTypes: FileMimeTypes,
-                                                     executionContext: scala.concurrent.ExecutionContext
+case class CalculationControllerComponents @Inject()(
+    calculationActionBuilder: CalculationActionBuilder,
+    actionBuilder: DefaultActionBuilder,
+    parsers: PlayBodyParsers,
+    messagesApi: MessagesApi,
+    langs: Langs,
+    fileMimeTypes: FileMimeTypes,
+    executionContext: scala.concurrent.ExecutionContext
 ) extends ControllerComponents
 
-/** Exposes actions and handler to the CalculateController by wiring the injected state into the base class.
+/** Exposes actions and handler to the CalculationController by wiring the injected state into the base class.
   */
-class CalculateBaseController @Inject()(ccc: CalculateControllerComponents)
+class CalculationBaseController @Inject() (ccc: CalculationControllerComponents)
     extends BaseController
     with RequestMarkerContext {
   override protected def controllerComponents: ControllerComponents = ccc
 
-  def CalculateAction: CalculateActionBuilder = ccc.postActionBuilder
+  def CalculationAction: CalculationActionBuilder = ccc.calculationActionBuilder
 
-  def CalculateResourceHandler: CalculateResourceHandler = ccc.postResourceHandler
 }

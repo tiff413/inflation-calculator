@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="calculate" target="1.8" />
       <module name="docs" target="1.8" />
       <module name="gatling" target="1.8" />
       <module name="inflation-calculator" target="1.8" />
@@ -10,6 +11,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="calculate" options="-encoding utf8 -g" />
       <module name="inflation-calculator" options="-encoding utf8 -g" />
       <module name="play-scala-rest-api-example" options="-encoding utf8 -g" />
     </option>

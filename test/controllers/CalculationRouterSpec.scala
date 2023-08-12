@@ -6,11 +6,11 @@ import play.api.mvc.{Request, RequestHeader, Result}
 import play.api.test._
 import play.api.test.Helpers._
 import play.api.test.CSRFTokenHelper.CSRFRequest
-import v1.calculate.PostResource
+import v1.calculation.PostResource
 
 import scala.concurrent.Future
 
-class CalculateRouterSpec extends PlaySpec with GuiceOneAppPerTest {
+class CalculationRouterSpec extends PlaySpec with GuiceOneAppPerTest {
 
   "CalculateRouter" should {
 

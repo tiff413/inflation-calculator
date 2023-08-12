@@ -11,10 +11,10 @@ import play.api.mvc._
 import _root_.controllers.Assets.Asset
 
 class Routes(
-  override val errorHandler: play.api.http.HttpErrorHandler, 
-  // @LINE:1
-  v1_post_PostRouter_0: v1.post.PostRouter,
-  val prefix: String
+              override val errorHandler: play.api.http.HttpErrorHandler,
+              // @LINE:1
+              v1_post_PostRouter_0: v1.calculation.CalculationRouter,
+              val prefix: String
 ) extends GeneratedRouter {
 
    @javax.inject.Inject()
@@ -43,7 +43,7 @@ class Routes(
 
 
   // @LINE:1
-  private[this] val prefixed_v1_post_PostRouter_0_0 = Include(v1_post_PostRouter_0.withPrefix(this.prefix + (if (this.prefix.endsWith("/")) "" else "/") + "v1/posts"))
+  private[this] val prefixed_v1_post_PostRouter_0_0 = Include(v1_post_PostRouter_0.withPrefix(this.prefix + (if (this.prefix.endsWith("/")) "" else "/") + "v1/calculation"))
 
 
   def routes: PartialFunction[RequestHeader, Handler] = {

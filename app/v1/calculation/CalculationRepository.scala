@@ -1,4 +1,4 @@
-package v1.calculate
+package v1.calculation
 
 import javax.inject.{Inject, Singleton}
 
@@ -15,9 +15,9 @@ class CalculationExecutionContext @Inject()(actorSystem: ActorSystem)
 
 
 /**
-  * A pure non-blocking interface for the CalculateRepository.
+  * A pure non-blocking interface for the CalculationRepository.
   */
-trait CalculateRepository {
+trait CalculationRepository {
   def create(data: PostData)(implicit mc: MarkerContext): Future[PostId]
 
   def list()(implicit mc: MarkerContext): Future[Iterable[PostData]]
@@ -26,15 +26,15 @@ trait CalculateRepository {
 }
 
 /**
-  * A trivial implementation for the Post Repository.
+  * A trivial implementation for the Calculation Repository.
   *
   * A custom execution context is used here to establish that blocking operations should be
   * executed in a different thread than Play's ExecutionContext, which is used for CPU bound tasks
   * such as rendering.
   */
 @Singleton
-class CalculateRepositoryImpl @Inject()()(implicit ec: CalculationExecutionContext)
-    extends CalculateRepository {
+class CalculationRepositoryImpl @Inject()()(implicit ec: CalculationExecutionContext)
+    extends CalculationRepository {
 
   private val logger = Logger(this.getClass)
 
