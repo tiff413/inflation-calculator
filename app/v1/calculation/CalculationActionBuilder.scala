@@ -94,7 +94,8 @@ class CalculationActionBuilder @Inject() (
   * This is a good way to minimize the surface area exposed to the controller, so the
   * controller only has to have one thing injected.
   */
-case class CalculationControllerComponents @Inject()(
+case class CalculationControllerComponents @Inject() (
+    calculationRepository: CalculationRepository,
     calculationActionBuilder: CalculationActionBuilder,
     actionBuilder: DefaultActionBuilder,
     parsers: PlayBodyParsers,

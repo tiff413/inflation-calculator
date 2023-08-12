@@ -1,23 +1,19 @@
 package v1.calculation
 
-import org.joda.time.YearMonth
-
 import javax.inject.Inject
 import play.api.Logger
 import play.api.data.Form
 import play.api.libs.json.Json
 import play.api.mvc._
 
-import java.util.Date
 import scala.concurrent.{ExecutionContext, Future}
-
-
 
 /** Takes HTTP requests and produces JSON.
   */
-class CalculationController @Inject()(cc: CalculationControllerComponents)(implicit
-                                                                           ec: ExecutionContext
-) extends CalculationBaseController(cc) {
+@Singleton
+class CalculationController @Inject() (ccc: CalculationControllerComponents)(
+    implicit ec: ExecutionContext
+) extends CalculationBaseController(ccc) {
 
   private val logger = Logger(getClass)
 
@@ -38,14 +34,20 @@ class CalculationController @Inject()(cc: CalculationControllerComponents)(impli
     processJson()
   }
 
-  private def processJson[A]()(implicit request: CalculationRequest[A]): Future[Result] = {
+  private def processJson[A]()(implicit
+      request: CalculationRequest[A]
+  ): Future[Result] = {
     def failure(badForm: Form[InputQuery]) = {
       Future.successful(BadRequest(badForm.errorsAsJson))
     }
 
     def success(input: InputQuery) = {
       // what to do after POST req
-      CalculateOperation.calculateInflation(input)
+      ccc.calculationRepository.calculateInflation(input) match {
+        case Left(errorMsg) => Future.successful(BadRequest(errorMsg))
+        case Right(outputQuery) => Ok(Json.toJson(outputQuery))
+      }
+
     }
 
     form.bindFromRequest().fold(failure, success)
