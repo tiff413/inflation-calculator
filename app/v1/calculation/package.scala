@@ -13,4 +13,8 @@ package object calculation {
       input: InputQuery,
       price: BigDecimal
   )
+
+  object OutputQuery {
+    implicit val outputQueryEncoder: Encoder[OutputQuery] = deriveEncoder[OutputQuery]
+  }
 }

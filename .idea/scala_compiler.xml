@@ -14,7 +14,7 @@
         <parameter value="-Xfatal-warnings" />
       </parameters>
     </profile>
-    <profile name="sbt 3" modules="calculate,inflation-calculator,play-scala-rest-api-example">
+    <profile name="sbt 3" modules="calculate,calculation,inflation-calculator,play-scala-rest-api-example">
       <option name="deprecationWarnings" value="true" />
       <option name="uncheckedWarnings" value="true" />
       <option name="featureWarnings" value="true" />
