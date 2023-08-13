@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/calculate.iml" filepath="$PROJECT_DIR$/.idea/modules/calculate.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/calculate-build.iml" filepath="$PROJECT_DIR$/.idea/modules/calculate-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/calculation.iml" filepath="$PROJECT_DIR$/.idea/modules/calculation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/calculation-build.iml" filepath="$PROJECT_DIR$/.idea/modules/calculation-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/docs.iml" filepath="$PROJECT_DIR$/.idea/modules/docs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gatling.iml" filepath="$PROJECT_DIR$/.idea/modules/gatling.iml" />
     </modules>
